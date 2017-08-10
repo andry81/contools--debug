@@ -1,3 +1,4 @@
 * text=auto !eol
 /eols.txt -text
 /test_for_eol_nul.bat -text svneol=unset#application/octet-stream
+/test_variable_return.bat -text
