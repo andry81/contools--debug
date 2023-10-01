@@ -7,6 +7,8 @@ rem   For example, the plus character (`+`) becomes the unicode codepoint
 rem   prefix character and expressions which contain this character like
 rem   `set BLABLA=1+1` WILL FAIL!
 
+rem repro: Windows XP, Windows 7
+
 setlocal
 
 set TEST=0
