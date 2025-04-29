@@ -8,4 +8,4 @@ set "?05=+"
 
 chcp 65000 >nul
 
-cmd.exe /C @echo.%?05%%~1
+cmd.exe /C @echo;%?05%%~1
