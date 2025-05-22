@@ -7,36 +7,42 @@ rem   For example, the plus character (`+`) becomes the unicode codepoint
 rem   prefix character and expressions which contain this character like
 rem   `set BLABLA=1+1` WILL FAIL!
 
-rem repro: Windows XP, Windows 7
+rem repro: Windows XP/7/8.1
 
 setlocal
 
 set TEST=0
 
+echo;1. `plus` sign does WORK HERE:
 chcp.com 866
 echo;=+002B=
+cmd.exe /C @echo;=+002B=
+set /A TEST+=1
+echo TEST=%TEST%
+echo;---
 
 rem workaround for the 65000 active codepage
-set "?5=+"
+set "?2B=+"
 
-rem + sign does WORK HERE!
-set /A TEST+=1
-echo TEST=%TEST%
-
+echo;2. `plus` sign is BROKEN HERE:
 chcp.com 65000
 echo;=+002B=
-
-rem + sign is BROKEN HERE!
+cmd.exe /C @echo;=+002B=
 set /A TEST+=1
 echo TEST=%TEST%
+echo;---
 
-rem + sign is WORKAROUNDED HERE!
-set /A TEST=1%?5%1
+echo;3. `plus` sign is WORKAROUNDED HERE:
+echo;=%?2B%002B=
+rem NOTE: `cmd.exe` has a command line double expansion
+cmd.exe /C @echo;=%%?2B%%002B=
+set /A TEST=1%?2B%1
 echo TEST=%TEST%
+echo;---
 
+echo;4. `plus` sign again does WORK HERE!
 chcp.com 65001
 echo;=+002B=
-
-rem + sign does WORK HERE!
+cmd.exe /C @echo;=+002B=
 set /A TEST+=1
-echo TEST=%TEST%
+echo 4. TEST=%TEST%
