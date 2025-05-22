@@ -14,7 +14,7 @@ setlocal
 set TEST=0
 
 echo;1. `plus` sign does WORK HERE:
-chcp.com 866
+chcp.com 437
 echo;=+002B=
 cmd.exe /C @echo;=+002B=
 set /A TEST+=1
