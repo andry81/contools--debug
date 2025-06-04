@@ -13,5 +13,9 @@ exit /b
 rem wait without pause to be able to press a key before the `wmic.exe` run
 for /L %%i in (1,1,10000) do echo %%i
 
-rem does consume a single press into console window
-"%SystemRoot%\System32\wbem\wmic.exe" path Win32_OperatingSystem get LocalDateTime /VALUE
+del /F /Q /A:-D ".temp\out.txt" >nul 2>nul
+
+rem execute with new minimized console and does print into a file
+start /MIN /WAIT "" "%SystemRoot%\System32\wbem\wmic.exe" /OUTPUT:.temp\out.txt path Win32_OperatingSystem get LocalDateTime /VALUE
+
+type .temp\out.txt
