@@ -14,6 +14,6 @@ exit /b 0
 
 :TEST2
 echo enter TEST2
-call ctrl-break.bat
+call "%%~dp0_externals\userbin\scripts\bat\ctrl-break.bat"
 echo exit TEST2
 exit /b 0

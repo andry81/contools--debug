@@ -3,7 +3,7 @@
 setlocal
 
 echo enter %~nx0
-call ctrl-break.bat
+call "%%~dp0..\_externals\userbin\scripts\bat\ctrl-break.bat"
 echo exit %~nx0
 
 rem exit prompt

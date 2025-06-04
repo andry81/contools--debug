@@ -3,7 +3,7 @@
 setlocal
 
 echo enter %~nx0
-call assert.bat
+call "%%~dp0..\_externals\contools\Scripts\Tools\std\assert.bat"
 echo exit %~nx0
 
 rem exit prompt
