@@ -5,8 +5,8 @@ repositories:
     url:          https://github.com/andry81/contools
     version:      master
     subpaths:
-      - Scripts/Tools/std
-      - Scripts/Tools/wmi
+      - scripts/tools/std
+      - scripts/tools/wmi
 
   _externals/contools--utils:
     type:         git

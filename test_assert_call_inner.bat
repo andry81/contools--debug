@@ -14,6 +14,6 @@ exit /b 0
 
 :TEST2
 echo enter TEST2
-call "%%~dp0_externals\contools\Scripts\Tools\std\assert.bat"
+call "%%~dp0_externals\contools\scripts\tools\std\assert.bat"
 echo exit TEST2
 exit /b 0

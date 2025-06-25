@@ -13,4 +13,4 @@ exit /b
 rem wait without pause to be able to press a key before the script run
 for /L %%i in (1,1,10000) do echo %%i
 
-call "%%~dp0_externals\contools\Scripts\Tools\wmi\print_wmi_local_datetime.vbs.bat"
+call "%%~dp0_externals\contools\scripts\tools\wmi\print_wmi_local_datetime.vbs.bat"
