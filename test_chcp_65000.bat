@@ -3,8 +3,8 @@
 rem CAUTION:
 rem   When the 65000 codepage is used then some of characters DOES BECOME
 rem   CONTROL CHARACTERS!
-rem   For example, the plus character (`+`) becomes the unicode codepoint
-rem   prefix character and expressions which contain this character like
+rem   For example, the plus character (`+`) becomes the Unicode shift character
+rem   (see RFC 2152) and expressions which contain this character like
 rem   `set BLABLA=1+1` WILL FAIL!
 
 rem repro: Windows XP/7/8.1
