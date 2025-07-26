@@ -4,14 +4,18 @@ rem USAGE:
 rem   test_for_chcp.bat [<flags>]
 
 rem Description:
-rem   Probes for the code page from `cp.lst` file.
+rem   Probes for a code page from `cp.lst` file.
 
 rem <flags>:
 rem   -pv
 rem     Prints only a valid code page number with success code from `chcp.com`.
 rem
 rem   -norestore
-rem     Do not restore code page after the probe.
+rem     Does not restore code page after the probe.
+rem
+rem   -noexclude
+rem     Does not exclude code pages marked with the `!` prefix character as by
+rem     default.
 :DOC_END
 
 setlocal DISABLEDELAYEDEXPANSION
