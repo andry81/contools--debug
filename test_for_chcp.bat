@@ -72,9 +72,10 @@ set LAST_ERROR=0
 set PREV_CODE_PAGE=0
 
 set "LINE="
+set "DESCRIPTION="
 
 for /F "usebackq tokens=* delims="eol^= %%i in ("%~dp0cp.lst") do ^
-for /F "eol=# tokens=1,* delims=|" %%j in ("%%i") do set "LINE=%%i" & set "CODE_PAGE=%%j" & call :PROCESS_LINE
+for /F "tokens=1,* delims=|" %%j in ("%%i") do set "LINE=%%i" & set "LINE0=%%j" & set "DESCRIPTION=%%k" & call :PROCESS_LINE
 
 if %FLAG_PRINT_VALID% EQU 0 ^
 if %PREV_CODE_PAGE% NEQ 0 if %LAST_CP% NEQ %PREV_CODE_PAGE% call :CHCP %%PREV_CODE_PAGE%%
@@ -82,13 +83,13 @@ if %PREV_CODE_PAGE% NEQ 0 if %LAST_CP% NEQ %PREV_CODE_PAGE% call :CHCP %%PREV_CO
 exit /b 0
 
 :PROCESS_LINE
-if defined CODE_PAGE set "CODE_PAGE=%CODE_PAGE: =%"
-if not defined CODE_PAGE exit /b 0
+if defined LINE0 set "LINE0=%LINE0: =%"
 
+set "CODE_PAGE=%LINE0%"
 set "CODE_PAGE_ATTR= "
 
 set EXCLUDE_CODE_PAGE=0
-if "%CODE_PAGE:~0,1%" == "!" (
+if defined CODE_PAGE if "%CODE_PAGE:~0,1%" == "!" (
   set EXCLUDE_CODE_PAGE=1
   set "CODE_PAGE_ATTR=!"
   set "CODE_PAGE=%CODE_PAGE:~1%"
@@ -109,9 +110,18 @@ if "%CODE_PAGE_STR:~4,1%" == "" set CODE_PAGE_STR= %CODE_PAGE_STR%
 if "%CODE_PAGE_STR:~4,1%" == "" set CODE_PAGE_STR= %CODE_PAGE_STR%
 if "%CODE_PAGE_STR:~4,1%" == "" set CODE_PAGE_STR= %CODE_PAGE_STR%
 
-if %LAST_CP% NEQ %CODE_PAGE_INT% (
-  call :CHCP %%CODE_PAGE_INT%% && echo;^<%CODE_PAGE_ATTR%%CODE_PAGE_STR%^>[%CODE_PAGE_INT%]
-) else echo;^<%CODE_PAGE_ATTR%%CODE_PAGE_STR%^>[%CODE_PAGE_INT%]
+set "CODE_PAGE_INT_STR=%CODE_PAGE_INT%"
+
+if "%CODE_PAGE_INT_STR:~4,1%" == "" set CODE_PAGE_INT_STR= %CODE_PAGE_INT_STR%
+if "%CODE_PAGE_INT_STR:~4,1%" == "" set CODE_PAGE_INT_STR= %CODE_PAGE_INT_STR%
+if "%CODE_PAGE_INT_STR:~4,1%" == "" set CODE_PAGE_INT_STR= %CODE_PAGE_INT_STR%
+if "%CODE_PAGE_INT_STR:~4,1%" == "" set CODE_PAGE_INT_STR= %CODE_PAGE_INT_STR%
+
+set LAST_ERROR=0
+if %LAST_CP% NEQ %CODE_PAGE_INT% call :CHCP %%CODE_PAGE_INT%% || set LAST_ERROR=1
+
+if %LAST_ERROR% EQU 0 setlocal ENABLEDELAYEDEXPANSION & ^
+for /F "tokens=* delims="eol^= %%i in ("<!CODE_PAGE_ATTR!!CODE_PAGE_STR!>[!CODE_PAGE_INT_STR!] | !DESCRIPTION!") do endlocal & echo;%%i
 
 exit /b 0
 
@@ -126,7 +136,6 @@ if %EXCLUDE_CODE_PAGE% EQU 0 (
 ) else set PREV_CODE_PAGE=0
 
 :SKIP_CHCP
-if %FLAG_PRINT_VALID% EQU 0 ^
 setlocal ENABLEDELAYEDEXPANSION & for /F "usebackq tokens=* delims="eol^= %%i in ('"!LINE!"') do endlocal & echo;%%~i
 
 exit /b 0
