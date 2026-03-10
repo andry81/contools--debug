@@ -59,8 +59,8 @@ if not defined LOAD_CONFIG_VERBOSE if %INIT_VERBOSE%0 NEQ 0 set LOAD_CONFIG_VERB
 
 rem ignore generation of user config on install and use, because user config must be already generated before first use
 if %NO_GEN%0 EQU 0 (
-  call "%%CONTOOLS_BUILD_TOOLS_ROOT%%/load_config_dir.bat" -gen_system_config -load_user_output_config -- "%%CONTOOLS_DEBUG_PROJECT_INPUT_CONFIG_ROOT%%" "%%CONTOOLS_DEBUG_PROJECT_OUTPUT_CONFIG_ROOT%%" || exit /b
-) else call "%%CONTOOLS_BUILD_TOOLS_ROOT%%/load_config_dir.bat" -load_user_output_config -- "%%CONTOOLS_DEBUG_PROJECT_INPUT_CONFIG_ROOT%%" "%%CONTOOLS_DEBUG_PROJECT_OUTPUT_CONFIG_ROOT%%" || exit /b
+  call "%%CONTOOLS_BUILD_TOOLS_ROOT%%/load_config_dir.bat" -+ -gen_system_config -load_user_output_config -- "%%CONTOOLS_DEBUG_PROJECT_INPUT_CONFIG_ROOT%%" "%%CONTOOLS_DEBUG_PROJECT_OUTPUT_CONFIG_ROOT%%" || exit /b
+) else call "%%CONTOOLS_BUILD_TOOLS_ROOT%%/load_config_dir.bat" -+ -load_user_output_config -- "%%CONTOOLS_DEBUG_PROJECT_INPUT_CONFIG_ROOT%%" "%%CONTOOLS_DEBUG_PROJECT_OUTPUT_CONFIG_ROOT%%" || exit /b
 
 rem init external projects
 rem ...
