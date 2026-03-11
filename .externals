@@ -13,6 +13,7 @@ repositories:
       - scripts/tools/cleanup
       - scripts/tools/exec
       - scripts/tools/std
+      - scripts/tools/tasks
       - scripts/tools/wmi
 
   _externals/contools--utils:
