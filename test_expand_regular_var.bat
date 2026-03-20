@@ -2,7 +2,9 @@
 
 setlocal DISABLEDELAYEDEXPANSION
 
-set "REM_ECHO=%~dp0_externals\userbin\scripts\bat\rem-echo.bat"
+cd "%~dp0"
+
+set "REM_ECHO=_externals\userbin\scripts\bat\rem-echo.bat"
 
 set ?.=^^^<nul 2^^^>nul start /B /WAIT "" cmd.exe /c @start /WAIT "" cmd.exe /k @echo close me!
 
