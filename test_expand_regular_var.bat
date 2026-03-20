@@ -10,6 +10,7 @@ set ?.
 
 echo ---
 
+PROMPT=$S$H
 echo on
 
 @echo 1. exe cmdline expansion

@@ -12,6 +12,7 @@ echo ---
 
 setlocal ENABLEDELAYEDEXPANSION
 
+PROMPT=$S$H
 echo on
 
 @echo 1. exe cmdline expansion
