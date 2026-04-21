@@ -25,10 +25,12 @@ set /A NEXT_INDEX=PREV_INDEX+1
 
 cd "%WD%" || exit /b
 
+set DIR_COUNT=0
+
 :LOOP
-if %ASCII_CODE% GEQ %ASCII_FILE_SIZE% exit /b 0
-if %PREV_INDEX% GEQ %ASCII_FILE_SIZE% exit /b 0
-if %PREV_INDEX% GEQ 255 exit /b 0 & rem just in case
+if %ASCII_CODE% GEQ %ASCII_FILE_SIZE% goto EXIT
+if %PREV_INDEX% GEQ %ASCII_FILE_SIZE% goto EXIT
+if %PREV_INDEX% GEQ 255 goto EXIT & rem just in case
 
 set ASCII_CODE_STR=%ASCII_CODE%
 
@@ -40,7 +42,7 @@ if not "!CHARS:~%PREV_INDEX%,1!" == "" setlocal ENABLEDELAYEDEXPANSION & for /F 
 if defined CHAR_%ASCII_CODE% setlocal ENABLEDELAYEDEXPANSION & for /F "tokens=* delims="eol^= %%i in ("!CHAR_%ASCII_CODE%!") do endlocal & (
   echo;[%ASCII_CODE_STR%] ^|%%i^|
   if exist "[%ASCII_CODE_STR%] %%i" rmdir "[%ASCII_CODE_STR%] %%i"
-  mkdir "[%ASCII_CODE_STR%] %%i"
+  mkdir "[%ASCII_CODE_STR%] %%i" && set /A DIR_COUNT+=1
 ) else set CHAR_%ASCII_CODE%
 
 set PREV_INDEX=%NEXT_INDEX%
@@ -48,3 +50,6 @@ set /A NEXT_INDEX+=1
 set /A ASCII_CODE+=1
 
 goto LOOP
+
+:EXIT
+echo Dirs created: %DIR_COUNT%
