@@ -16,6 +16,8 @@ repositories:
       - scripts/tools/std
       - scripts/tools/tasks
       - scripts/tools/wmi
+      - scripts/tools/ToolAdaptors/__init__
+      - scripts/tools/ToolAdaptors/hta
 
   _externals/contools--utils:
     type:         git
