@@ -13,9 +13,9 @@ exit /b
 rem wait without pause to be able to press a key before the `wmic.exe` run
 for /L %%i in (1,1,10000) do echo %%i
 
-del /F /Q /A:-D ".temp\out.txt" >nul 2>nul
+del /F /Q /A:-D "%~dp0.temp\out.txt" >nul 2>nul
 
 rem execute with new minimized console and does print into a file
-start "" /MIN /WAIT "%SystemRoot%\System32\wbem\wmic.exe" /OUTPUT:.temp\out.txt path Win32_OperatingSystem get LocalDateTime /VALUE
+start "" /MIN /WAIT "%SystemRoot%\System32\wbem\wmic.exe" /OUTPUT:"%~dp0.temp\out.txt" path Win32_OperatingSystem get LocalDateTime /VALUE
 
-type .temp\out.txt
+type "%~dp0.temp\out.txt"
