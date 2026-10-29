@@ -2,7 +2,7 @@
 
 setlocal DISABLEDELAYEDEXPANSION
 
-cd "%~dp0"
+cd /d "%~dp0"
 
 set "REM_ECHO=_externals\userbin\scripts\bat\rem-echo.bat"
 
@@ -12,27 +12,29 @@ set ?.
 
 echo ---
 
+setlocal ENABLEDELAYEDEXPANSION
+
 PROMPT=$S$H
 echo on
 
 @echo 1. exe cmdline expansion
 
-"%COMSPEC%" /c @"%%REM_ECHO%%" %%?.%%
+"!COMSPEC!" /c @"!REM_ECHO!" !?.!
 
 @echo ---
 
 @echo 2. start+exe cmdline expansion with old environment
 
-start "" /I /B /WAIT "%COMSPEC%" /c @"%REM_ECHO%" %%?.%%
+start "" /I /B /WAIT "!COMSPEC!" /c @"!REM_ECHO!" !?.!
 
 @echo ---
 
 @echo 3. call+script expansion
 
-call "%%REM_ECHO%%" %%?.%%
+call "!REM_ECHO!" !?.!
 
 @echo ---
 
 @echo 4. script w/o call expansion
 
-"%REM_ECHO%" %?.%
+"!REM_ECHO!" !?.!

@@ -23,7 +23,7 @@ set ASCII_CODE=1
 set PREV_INDEX=0
 set /A NEXT_INDEX=PREV_INDEX+1
 
-cd "%WD%" || exit /b
+cd /d "%WD%" || exit /b
 
 set DIR_COUNT=0
 
