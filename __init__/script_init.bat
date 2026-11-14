@@ -2,7 +2,7 @@
 
 if %IMPL_MODE%0 NEQ 0 goto IMPL
 
-set INIT_EXTERNALS=1
+set CONTOOLS_INIT_EXTERNALS=1
 
 call "%%~dp0__init__.bat" || exit /b
 
